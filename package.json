@@ -1,0 +1,27 @@
+{
+  "name": "typescriptyes",
+  "version": "1.0.0",
+  "description": "Typescript - The future of the web!",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel --host 0.0.0.0 --port 8080 watch src/index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lolimay/TypescriptYes.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lolimay/TypescriptYes/issues"
+  },
+  "homepage": "https://github.com/lolimay/TypescriptYes#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "parcel": "^1.12.3",
+    "stylus": "^0.54.7",
+    "typescript": "^3.6.3"
+  }
+}

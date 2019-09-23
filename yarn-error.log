@@ -1,0 +1,55 @@
+Arguments: 
+  /home/lolimay/.nvm/versions/node/v12.10.0/bin/node /home/lolimay/.config/yarn/global/node_modules/.bin/yarn global dir --json
+
+PATH: 
+  /home/lolimay/.deno/bin:/home/lolimay/.local/bin:/home/lolimay/opt:/home/lolimay/.config/yarn/global/node_modules/.bin:/home/lolimay/opt/BaiduPCS-Go:/media/lolimay/Code/Shell:/media/lolimay/Code/Deepin/BaiduPCS:/home/lolimay/.nvm/versions/node/v12.10.0/bin:/home/lolimay/.local/bin:/home/lolimay/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/snap/bin
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  12.10.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /media/lolimay/Code/Web/parcel/TypescriptYes/package.json: Unexpected string in JSON at position 218
+      at JSON.parse (<anonymous>)
+      at /home/lolimay/.config/yarn/global/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/home/lolimay/.config/yarn/global/node_modules/yarn/lib/cli.js:304:30)
+      at /home/lolimay/.config/yarn/global/node_modules/yarn/lib/cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "typescriptyes",
+    "version": "1.0.0",
+    "description": "Typescript - The future of the web!",
+    "main": "index.js",
+    "scripts": {
+      "start": "parcel watch src/index.html --host=0.0.0.0 --port 8080"
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/lolimay/TypescriptYes.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/lolimay/TypescriptYes/issues"
+    },
+    "homepage": "https://github.com/lolimay/TypescriptYes#readme",
+    "devDependencies": {
+      "@types/jest": "^24.0.18",
+      "jest": "^24.9.0",
+      "parcel": "^1.12.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
