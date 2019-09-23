@@ -18,7 +18,7 @@ const token = new Doom3Token();
 test('special characters', () => {
     tokenizer.setSource(`  \t\n\v`);
     expect(tokenizer.getNextToken(token)).toBe(false);
-})
+});
 
 test('digits', () => {
     tokenizer.setSource(`0.4`);

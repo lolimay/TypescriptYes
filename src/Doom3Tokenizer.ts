@@ -29,7 +29,7 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
 
         do {
             char = this._getChar();
-        } while (char.length > 0 && this._isWhiteSpaces(char));
+        } while (!!char && this._isWhiteSpaces(char));
         return char;
     }
     private _skipSingleLineComments(): string {
@@ -56,18 +56,17 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
         let char: string = this._getChar();
         let isNegate: boolean = char === '-';
         let consumed: boolean = false;
-
         do {
             token.addChar(char);
             if (char === '.') {
                 isFloat = true;
             } else if (char !== '-') {
                 let num: number = parseInt(char, 10);
-                
                 if (!isFloat) {
                     value = value*10 + num; // 整数
                 } else {
                     value = value + scaleValue*num; // 小数
+                    scaleValue *= 0.1;
                 }
             }
             if (consumed === true) {
@@ -104,7 +103,7 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
         return false;
     }
     private _getString(token: Doom3Token): void {
-        let char: string = '';
+        let char: string = this._getChar();
 
         token.setType(ETokenType.STRING);
         do {
@@ -113,7 +112,7 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
                 char = this._getChar();
             }
         } while (
-            char.length>0 && this._isWhiteSpaces(char) && !this._isSpecialChar(char)
+            char.length>0 && !this._isWhiteSpaces(char) && !this._isSpecialChar(char)
         );
     }
     
@@ -134,20 +133,16 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
 
         token.reset();
         do {
-            // 第一步，跳过所有空白字符，返回第一个非空白字符。
             char = this._skipWhiteSpace();
-            // 第二步，判断非空白字符的第一个字符是什么
-            if (this._getChar() === '/' && this._peekChar() === '/') {
-                // 单行注释
+            if (char === '/' && this._peekChar() === '/') {
                 char = this._skipSingleLineComments();
-            } else if (this._getChar() === '/' && this._getChar() === '*') {
-                // 多行注释
+            } else if (char === '/' && this._peekChar() === '*') {
                 char = this._skipMultiLineComments();
             } else if (
                 this._isDigit(char) || char === '-' ||
                 (char === '.' && this._isDigit(this._peekChar()))
             ) {
-                this._ungetChar(); // 回退一步
+                this._ungetChar();
                 this._getNumber(token);
                 return true;
             } else if (char === '"' || char === "'") {
