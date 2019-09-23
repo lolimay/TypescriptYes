@@ -1,12 +1,26 @@
-import './style.styl';
-import { Canvas2D } from './Canvas2D';
+import { Doom3Tokenizer } from './Doom3Tokenizer';
+import { Doom3Token } from './Doom3Token';
+import { ETokenType } from './definitions';
 
-const canvas: HTMLCanvasElement | null = document.querySelector('canvas') as HTMLCanvasElement;
-
-if (canvas === null) {
-    throw new Error('Can\'t obtain HTMLCanvasElement!');
+const input: string = `
+numMeshes 5
+/*
+ * joints 关键字定义了骨骼动画的 bindPose
+ */
+joints {
+    "origin" -1 (0 0 0) (-0.5 -0.5 -0.5)
+    "Body" 0 (-12.1038131714 0 79.004776001) (-0.5 -0.5 -0.5)
+    // origin
 }
+`.trim();
+const tokenizer = new Doom3Tokenizer();
+const token = new Doom3Token();
+tokenizer.setSource(input);
 
-const canvas2d: Canvas2D = new Canvas2D(canvas);
-
-canvas2d.drawText('Hello World');
+while (tokenizer.getNextToken(token)) {
+    if (token.type === ETokenType.NUMBER) {
+        console.log(`NUMBER: ${ token.getFloat() }`);
+    } else {
+        console.log(`STRING: ${ token.getString() }`);
+    }
+}
