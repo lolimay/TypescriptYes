@@ -4,7 +4,7 @@
   "description": "Typescript - The future of the web!",
   "main": "index.js",
   "scripts": {
-    "start": "parcel --host 0.0.0.0 --port 8080 watch src/index.html",
+    "start": "parcel --host 0.0.0.0 --port 8080 watch index.html",
     "test": "jest"
   },
   "repository": {

@@ -3,9 +3,10 @@ import { Doom3Token } from './Doom3Token';
 
 export class Doom3Tokenizer implements IDoom3Tokenizer {
     private _digits: Array<string> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    private _whiteSpaces: Array<string> = [' ', '\t', '\n', '\v'];
+    private _whiteSpaces: Array<string> = [' ', '\t', '\n', '\v', '\r'];
     private _source: string;
     private _currentIndex!: number;
+    private _current: IDoom3Token;
 
     private _isDigit(char: string): boolean {
         return this._digits.includes(char);
@@ -115,19 +116,7 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
             char.length>0 && !this._isWhiteSpaces(char) && !this._isSpecialChar(char)
         );
     }
-    
-    public constructor() {
-        this._source = '';
-        this.reset();
-    }
-    public setSource(source: string) {
-        this._source = source;
-        this.reset();
-    }
-    public reset(): void {
-        this._currentIndex = 0;
-    }
-    public getNextToken(tok: IDoom3Token): boolean {
+    private _getNextToken(tok: IDoom3Token): boolean {
         let token: Doom3Token = tok as Doom3Token;
         let char = '';
 
@@ -155,5 +144,27 @@ export class Doom3Tokenizer implements IDoom3Tokenizer {
             }
         } while (char.length > 0);
         return false;
+    }
+    
+    public constructor() {
+        this._source = '';
+        this._current = new Doom3Token();
+        this.reset();
+    }
+    public get current(): IDoom3Token {
+        return this._current;
+    }
+    public createIDoom3Token(): IDoom3Token {
+        return new Doom3Token();
+    }
+    public setSource(source: string) {
+        this._source = source;
+        this.reset();
+    }
+    public reset(): void {
+        this._currentIndex = 0;
+    }
+    public moveNext(): boolean {
+        return this._getNextToken(this._current);
     }
 }
