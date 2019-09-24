@@ -1,5 +1,5 @@
 import './style.styl';
-import { Canvas2D } from './Canvas2D';
+import { Canvas2D } from '../Doom3/Canvas2D';
 
 const canvas: HTMLCanvasElement | null = document.querySelector('canvas') as HTMLCanvasElement;
 

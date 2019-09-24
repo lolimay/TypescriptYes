@@ -1,6 +1,6 @@
-import { Doom3Tokenizer } from './Doom3Tokenizer';
-import { ETokenType } from './definitions';
-import { HTTPRequest } from './HTTPRequest';
+import { Doom3Tokenizer } from './Doom3/Doom3Tokenizer';
+import { ETokenType } from './Doom3/definitions';
+import { HTTPRequest } from './Doom3/HTTPRequest';
 
 async function processHttpResponse() {
     const url = './public/level.proc';
